@@ -2,7 +2,13 @@
 
 
 {% block content %}
-  <!-- {% for video in videos %}
-    <video src="{{video.video.url}}"></video>
-  {% endfor %} -->
+  {% if videos %}
+    {% for video in videos %}
+    <video width="320" height="240" controls="controls">
+      <source src="{{video.video.url}}"/>
+    </video>
+    {% endfor %}
+  {% else %}
+    <h1>There is no videos uploaded yet ...</h1>
+  {% endif %}
 {% endblock %}
