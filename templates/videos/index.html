@@ -4,8 +4,13 @@
   {% if videos %}
     {% for video in videos %}
     <div class="card mt-4 mb-4" style="box-shadow: 0 0 25px 3px rgb(165, 165, 165);">
-      <div class="card-header">
+      <div class="card-header d-flex justify-content-between ml-4 mr-4 mt-3">
         <h5 class="card-title">{{video.title}}</h5>
+        
+        {% if video.is_recently_uploaded %}
+          <h5 class="text-danger">New</h5>
+        {% endif %}
+      
       </div>
       <div class="card-body row text-center">
         <div class="col-md-6 mt-3 mb-3">

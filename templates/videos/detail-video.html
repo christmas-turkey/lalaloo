@@ -18,10 +18,38 @@
           <h5 class="d-flex"><a href="#" class="nav-link"><span><i class="fas fa-thumbs-up"></i>{{video.likes}}</span></a>
             <a href="#" class="nav-link"><span><i class="fas fa-thumbs-down"></i>{{video.dislikes}}</span></a></h5>
         </div>
-        <div class="mt-4 ml-3">
+        <div class="mt-4 ml-3 mb-4">
           <p class="card-text"><small class="text-muted">{{video.date|timesince}} ago</small></p>
           <p class="card-text">{{video.description}}</p>
         </div>
+      </div>
+    </div>
+    <div class="col-md-5 mt-3">
+      <form action="{% url 'videos:add-comment' video.slug %}" method="POST">
+        {% csrf_token %}
+
+        {% for comment_form_field in comment_form %}
+        
+          <div class="form-group">
+            <label for="{{comment_form_field.auto_id}}"><h5>{{comment_form_field.label}}</h5></label>
+            {{comment_form_field}}
+          </div>
+
+        {% endfor %}
+        <button class="btn btn-primary">Submit</button>
+      </form>
+      <div class="mt-4">
+        {% for comment in comments %}
+        <div class="card text-white bg-primary mb-3" style="max-width: 50rem;">
+          <div class="card-header d-flex justify-content-between">
+              <div><i class="fas fa-user"></i> {{comment.author}}</div>
+              <span>{{comment.date|timesince}} ago</span>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{comment.body}}</p>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </div>

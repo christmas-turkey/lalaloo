@@ -11,10 +11,22 @@ class Video(models.Model):
   likes = models.IntegerField(default=0)
   dislikes = models.IntegerField(default=0)
   views = models.IntegerField(default=0)
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
+  author = models.ForeignKey(User, on_delete=models.PROTECT)
   video = models.FileField(upload_to="%Y/%m/%d")
   slug = models.SlugField()
 
   def is_recently_uploaded(self):
     return self.date >= (timezone.now() - timezone.timedelta(days=7))
+  
+  def __str__(self):
+    return self.title
+
+class Comment(models.Model):
+  author = models.ForeignKey(User, on_delete=models.PROTECT)
+  video = models.ForeignKey(Video, on_delete=models.CASCADE)
+  body = models.TextField()
+  date = models.DateTimeField(auto_now_add=True)
+
+  def __str__(self):
+    return self.author
 
