@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-7">
+      <video class="w-100" controls="controls">
+        <source src="{{video.video.url}}"/>
+      </video>
+      <div class="row">
+        <div class="mt-3 col-md-6">
+          <span class="d-flex">
+            <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>{{video.views}}</small></p>
+            <p class="card-text ml-3"><small class="text-muted"><i class="fas fa-user-alt"></i>{{video.author}}</small></p>
+          </span>
+          <h3>{{video.title}}</h3>
+        </div>
+        <div class="col-md-6 mt-3 d-flex justify-content-end">
+          <h5 class="d-flex"><a href="#" class="nav-link"><span><i class="fas fa-thumbs-up"></i>{{video.likes}}</span></a>
+            <a href="#" class="nav-link"><span><i class="fas fa-thumbs-down"></i>{{video.dislikes}}</span></a></h5>
+        </div>
+        <div class="mt-4 ml-3">
+          <p class="card-text"><small class="text-muted">{{video.date|timesince}} ago</small></p>
+          <p class="card-text">{{video.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

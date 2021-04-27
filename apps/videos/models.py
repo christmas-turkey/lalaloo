@@ -13,6 +13,7 @@ class Video(models.Model):
   views = models.IntegerField(default=0)
   author = models.ForeignKey(User, on_delete=models.CASCADE)
   video = models.FileField(upload_to="%Y/%m/%d")
+  slug = models.SlugField()
 
   def is_recently_uploaded(self):
     return self.date >= (timezone.now() - timezone.timedelta(days=7))
