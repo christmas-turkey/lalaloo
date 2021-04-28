@@ -6,5 +6,6 @@ from .settings.base import MEDIA_ROOT, MEDIA_URL
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('videos.urls'))
+    path('', include('videos.urls')),
+    path('account/', include('account.urls'))
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)

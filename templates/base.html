@@ -20,7 +20,7 @@
 
   <nav class="navbar p-4 navbar-expand-md navbar-dark" style="background-color: blueviolet;">
 
-    <a class="navbar-brand d-flex flex-column align-items-center" href="#">
+    <a class="navbar-brand d-flex flex-column align-items-center" href="{% url 'videos:main-page' %}">
       <h3>La La Loo <i class="fas fa-video"></i></h3>
       <p>A video hub service</p>
     </a>
@@ -32,14 +32,23 @@
     <div class="collapse navbar-collapse ml-3 mr-3" id="collapsibleNavbar">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item ml-3 mr-3">
-          <a class="nav-link text-light" href="#">Link</a>
+          <a class="nav-link text-light" href="#">Privacy policy</a>
         </li>
-        <li class="nav-item ml-3 mr-3">
-          <a class="nav-link text-light" href="#">Link</a>
-        </li>
-        <li class="nav-item ml-3 mr-3">
-          <a class="nav-link text-light" href="#">Link</a>
-        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item ml-3 mr-3">
+            <a class="nav-link text-light" href="{% url 'account:profile' user.username %}"><i class="fas fa-user"></i>{{request.user.username}}</a>
+          </li>
+          <li class="nav-item ml-3 mr-3">
+            <a class="nav-link text-light" href="{% url 'account:signout' %}"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+          </li>
+        {% else %}
+          <li class="nav-item ml-3 mr-3">
+            <a class="nav-link text-light" href="{% url 'account:signin' %}"><i class="fas fa-sign-in-alt"></i>Sign in</a>
+          </li>
+          <li class="nav-item ml-3 mr-3">
+            <a class="nav-link text-light" href="{% url 'account:signup' %}"><i class="fas fa-user-plus"></i>Sign up</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </nav>
@@ -59,10 +68,10 @@
         <a class="nav-link text-light" href="#">Privacy policy</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="#">Sign in</a>
+        <a class="nav-link text-light" href="{% url 'account:signin' %}">Sign in</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="#">Sign up</a>
+        <a class="nav-link text-light" href="{% url 'account:signup' %}">Sign up</a>
       </li>
     </ul>
     <p class="mt-4">&copy;2021 All rights reserved.</p>
