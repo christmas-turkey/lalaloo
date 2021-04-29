@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
   {% if videos %}
     {% for video in videos %}
     <div class="card mt-4 mb-4" style="box-shadow: 0 0 25px 3px rgb(165, 165, 165);">
-      <div class="card-header d-flex justify-content-between ml-4 mr-4 mt-3">
+      <div class="card-header d-flex justify-content-between pl-4 pr-4 pt-4">
         <h5 class="card-title">{{video.title}}</h5>
         
         {% if video.is_recently_uploaded %}
@@ -13,31 +14,39 @@
       
       </div>
       <div class="card-body row text-center">
+
         <div class="col-md-6 mt-3 mb-3">
           <video class="w-75" muted playsinline autoplay>
             <source src="{{video.video.url}}"/>
           </video>
         </div>
+
         <div class="col-md-6 mt-4 text-left">
           <p class="card-text">{{video.description}}</p>
           <p class="card-text"><small class="text-muted">{{video.date|timesince}} ago</small></p>
           <p class="card-text"><small class="text-muted"><i class="fas fa-user-alt"></i>{{video.author}}</small></p>
           <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>{{video.views}}</small></p>
         </div>
-        <div class="container-fluid card-footer d-flex row">
-          <div class="col-md-6 mt-3">
+
+      </div>
+      <div class="container-fluid card-footer pl-4 pr-4 pt-3">
+
+        <div class="row">
+          <div class="col-md-6 pt-3">
             <h5 class="d-flex"><a href="#" class="nav-link"><span><i class="fas fa-thumbs-up"></i>{{video.likes}}</span></a>
             <a href="#" class="nav-link"><span><i class="fas fa-thumbs-down"></i>{{video.dislikes}}</span></a></h5>
           </div>
           <div class="col-md-6 text-right">
             <a href="{{video.video.url}}" class="btn btn-primary mt-3" download>Download video</a>
-            <a href="{% url 'videos:detail-video' video.slug %}" type="button" class="btn btn-primary mt-3">View</a>
+            <a href="{% url 'videos:detail-video' video.uuid %}" type="button" class="btn btn-primary mt-3">View</a>
           </div>
         </div>
+        
       </div>
     </div>
     {% endfor %}
   {% else %}
     <h1>There is no videos uploaded yet ...</h1>
   {% endif %}
+
 {% endblock %}

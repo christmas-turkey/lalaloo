@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign in{% endblock %}
+{% block title %}LaLaLoo - sign in to your account{% endblock %}
 
 {% block content %}
 
 <main class="row text-center" style="padding-top: 100px; padding-bottom: 100px;">
   <div class="col-md-4"></div>
   <form class="col-md-4" action="." method="POST">
+
     {% csrf_token %}
+    
     <h2 class="mb-4">Sign in</h2>
     {% include 'inc/form-fields.html' %}
     <button class="btn btn-primary">Sign in</button>
+
     {% if messages %}
       {% for message in messages %}
         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
@@ -20,6 +23,7 @@
         {% endif %}
       {% endfor %}
     {% endif %}
+
   </form>
 </main>
 

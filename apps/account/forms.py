@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib import messages
+from django.apps import apps
+
 
 class SignInForm(AuthenticationForm):
 
@@ -40,4 +42,31 @@ class SignUpForm(UserCreationForm):
     'class': 'form-control',
     'placeholder': 'Confirm password:'
   }))
+
+class VideoUploadForm(forms.ModelForm):
+
+  title = forms.CharField(widget=forms.TextInput(attrs={
+    'class': 'form-control',
+    'placeholder': 'Enter video title:'
+  }))
+
+  description = forms.CharField(widget=forms.Textarea(attrs={
+    'class': 'form-control',
+    'placeholder': 'Enter video description:',
+    'style': 'resize: none;'
+  }))
+
+  topics = forms.CharField(widget=forms.TextInput(attrs={
+    'class': 'form-control',
+    'placeholder': 'Enter topics list due to pattern: "topic,topic,topic"'
+  }))
+  
+  video = forms.FileField(widget=forms.FileInput(attrs={
+    'class': 'form-control',
+    'placeholder': 'Select video'
+  }))
+
+  class Meta:
+    model = apps.get_model('videos', 'Video')
+    fields = ('title', 'description', 'topics', 'video')
 

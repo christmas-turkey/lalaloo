@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 
+{% block title %}LaLaLoo - {{request.user.username}}{% endblock %}
+
 {% block content %}
 
-  <h1>Hello, {{request.user.username}}</h1>
+  <h4><i class="fas fa-user"></i> Hello, {{request.user.username}}</h4>
+
+  <section class="row" style="margin-top: 70px;">
+    <form action="." enctype="multipart/form-data" method="POST" class="col-md-6">
+
+      {%  csrf_token %}
+
+      <h3 class="mb-3">Upload video</h3>
+      {% include 'inc/form-fields.html' %}
+      <button class="btn btn-primary">Upload</button>
+      
+    </form>
+  </section>
 
 {% endblock %}

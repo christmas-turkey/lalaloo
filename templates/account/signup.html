@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign up{% endblock %}
+{% block title %}LaLaLoo - creating account{% endblock %}
 
 {% block content %}
 
 <main class="row text-center" style="padding-top: 100px; padding-bottom: 100px;">
   <div class="col-md-4"></div>
   <form class="col-md-4" action="." method="POST">
+
     {% csrf_token %}
     <h2 class="mb-4">Sign up</h2>
     {% include 'inc/form-fields.html' %}
     <button class="btn btn-primary">Sign up</button>
+    
   </form>
 </main>
 
