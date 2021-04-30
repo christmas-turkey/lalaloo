@@ -2,7 +2,7 @@ import json
 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView
 from django.views import View
 from django.contrib.auth.views import redirect_to_login
 from django.db.models import F
@@ -11,11 +11,37 @@ from django.http import JsonResponse
 from .models import Video, Comment
 from .forms import CommentForm
 
-class MainPage(ListView):
-  model = Video
-  template_name = "videos/index.html"
-  context_object_name = "videos"
-  queryset = Video.objects.all().order_by('-date')
+class MainPage(View):
+  
+  def get(self, request, *args, **kwargs):
+
+      context = {
+        'videos': Video.objects.all().order_by('-date') 
+      }
+      
+      return render(request, 'videos/index.html', context)
+  
+  def post(self, request, *args, **kwargs):
+
+    search_request = request.POST.get('search_request')
+
+    videos = None
+
+    if search_request.startswith('#'):
+
+      topic = search_request.split('#')[1]
+
+      videos = Video.objects.filter(topics__icontains=topic)
+    
+    else:
+      
+      videos = Video.objects.filter(title__icontains=search_request)
+    
+    context = {
+      'videos': videos
+    }
+
+    return render(request, 'videos/index.html', context)
 
 class DetailVideo(DetailView):
   model = Video
