@@ -1,9 +1,12 @@
+import json
+
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views import View
 from django.contrib.auth.views import redirect_to_login
 from django.db.models import F
+from django.http import JsonResponse
 
 from .models import Video, Comment
 from .forms import CommentForm
@@ -50,3 +53,23 @@ class AddComment(View):
         return redirect_to_login(login_url=reverse_lazy('account:signin'), next=reverse_lazy('videos:detail-video', kwargs={'video': self.kwargs['video']}))
     
     return redirect(reverse_lazy('videos:detail-video', kwargs={'video': self.kwargs['video']}))
+
+class LikeVideo(View):
+
+  def post(self, request, *args, **kwargs):
+
+    if request.is_ajax:
+
+      like = json.loads(request.body.decode())['like']
+      like_type = json.loads(request.body.decode())['like_type']
+
+      video = Video.objects.get(uuid=kwargs['video'])
+      
+      if like_type == "like":
+        video.likes = F('likes') + like
+      else:
+        video.dislikes = F('dislikes') + like
+
+      video.save()
+
+      return JsonResponse({'like': like})

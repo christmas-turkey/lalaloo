@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 
   {% if videos %}
     {% for video in videos %}
+
     <div class="card mt-4 mb-4" style="box-shadow: 0 0 25px 3px rgb(165, 165, 165);">
       <div class="card-header d-flex justify-content-between pl-4 pr-4 pt-4">
         <h5 class="card-title">{{video.title}}</h5>
@@ -33,8 +35,25 @@
 
         <div class="row">
           <div class="col-md-6 pt-3">
-            <h5 class="d-flex"><a href="#" class="nav-link"><span><i class="fas fa-thumbs-up"></i>{{video.likes}}</span></a>
-            <a href="#" class="nav-link"><span><i class="fas fa-thumbs-down"></i>{{video.dislikes}}</span></a></h5>
+            <h5 class="d-flex">
+
+              <a onclick="sendLike(this)"
+                data-adress="{% url 'videos:like-video' video.uuid %}"
+                data-like-type="like"
+                data-video-uuid="{{video.uuid}}"
+                class="nav-link like-link"><span><i class="fas fa-thumbs-up"></i>
+                <span id="likes">{{video.likes}}</span></span>
+              </a>
+
+              <a onclick="sendLike(this)"
+                data-adress="{% url 'videos:like-video' video.uuid %}"
+                data-like-type="dislike"
+                data-video-uuid="{{video.uuid}}"
+                class="nav-link like-link"><span><i class="fas fa-thumbs-down"></i>
+                <span id="dislikes">{{video.dislikes}}</span></span>
+              </a>
+            
+              </h5>
           </div>
           <div class="col-md-6 text-right">
             <a href="{{video.video.url}}" class="btn btn-primary mt-3" download>Download video</a>
@@ -44,9 +63,18 @@
         
       </div>
     </div>
+
     {% endfor %}
   {% else %}
-    <h1>There is no videos uploaded yet ...</h1>
+    <h1>There are no videos uploaded yet ...</h1>
   {% endif %}
+
+{% endblock %}
+
+{% block extra-scripts %}
+
+  <script>
+    {% include "inc/likes-procession.js" %}
+  </script>
 
 {% endblock %}

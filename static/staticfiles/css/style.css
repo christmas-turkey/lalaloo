@@ -3,6 +3,6 @@
   margin-right: 8px;
 }
 
-video:hover {
-  background-color: black;
+.liked * {
+  color: rgb(182, 1, 1);
 }
