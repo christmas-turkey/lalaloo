@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item mt-3 ml-2 mr-2">
-          <a class="nav-link text-light" href="#"><i class="fas fa-bookmark"></i>Privacy policy</a>
+          <a class="nav-link text-light" href="{% url 'videos:privacy-policy' %}"><i class="fas fa-bookmark"></i>Privacy policy</a>
         </li>
         {% if user.is_authenticated %}
           <li class="nav-item mt-3 ml-2 mr-2">
@@ -65,7 +65,7 @@
     </a>
     <ul class="navbar-nav d-flex flex-column mt-3">
       <li class="nav-item">
-        <a class="nav-link text-light" href="#">Privacy policy</a>
+        <a class="nav-link text-light" href="{% url 'videos:privacy-policy' %}">Privacy policy</a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-light" href="{% url 'account:signin' %}">Sign in</a>
@@ -74,7 +74,7 @@
         <a class="nav-link text-light" href="{% url 'account:signup' %}">Sign up</a>
       </li>
     </ul>
-    <p class="mt-4">&copy;2021 All rights reserved.</p>
+    <p class="mt-4 text-light">&copy;2021 All rights reserved.</p>
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

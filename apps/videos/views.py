@@ -2,7 +2,7 @@ import json
 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from django.views import View
 from django.contrib.auth.views import redirect_to_login
 from django.db.models import F
@@ -113,3 +113,6 @@ class LikeVideo(View):
       video.save()
 
       return JsonResponse({'like': like})
+
+class PrivacyPolicy(TemplateView):
+  template_name = "videos/privacy-policy.html"
