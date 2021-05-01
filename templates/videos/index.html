@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load custom_filters %}
 
 {% block content %}
 
@@ -34,9 +35,8 @@
             <source src="{{video.video.url}}"/>
           </video>
         </div>
-
         <div class="col-md-6 mt-4 text-left">
-          <p class="card-text">{{video.description}}</p>
+          <p class="card-text">{{video.description|restrict_text}}</p>
           <p class="card-text"><small class="text-muted">{{video.date|timesince}} ago</small></p>
           <p class="card-text"><small class="text-muted"><i class="fas fa-user-alt"></i>{{video.author}}</small></p>
           <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>{{video.views}}</small></p>

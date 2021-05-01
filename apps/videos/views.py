@@ -13,6 +13,7 @@ from .forms import CommentForm
 
 class MainPage(View):
   
+
   def get(self, request, *args, **kwargs):
 
       context = {
@@ -21,6 +22,7 @@ class MainPage(View):
       
       return render(request, 'videos/index.html', context)
   
+
   def post(self, request, *args, **kwargs):
 
     search_request = request.POST.get('search_request')
@@ -30,11 +32,9 @@ class MainPage(View):
     if search_request.startswith('#'):
 
       topic = search_request.split('#')[1]
-
       videos = Video.objects.filter(topics__icontains=topic)
     
     else:
-      
       videos = Video.objects.filter(title__icontains=search_request)
     
     context = {
