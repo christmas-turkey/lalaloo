@@ -31,8 +31,10 @@ class SignUp(CreateView):
     login(self.request, user)
     return redirect(self.get_success_url())
 
+
 class SignOut(views.LogoutView):
   next_page = reverse_lazy('videos:main-page')
+
 
 class Profile(LoginRequiredMixin, CreateView):
   login_url = reverse_lazy('account:signin')

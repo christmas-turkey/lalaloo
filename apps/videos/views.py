@@ -12,6 +12,7 @@ from django.core.paginator import Paginator
 from .models import Video, Comment
 from .forms import CommentForm
 
+
 class MainPage(View):
 
   def paginate(self, request, objects):
@@ -57,6 +58,7 @@ class MainPage(View):
 
     return render(request, 'videos/index.html', context)
 
+
 class DetailVideo(DetailView):
   model = Video
   slug_url_kwarg = "video"
@@ -79,6 +81,7 @@ class DetailVideo(DetailView):
       context['comment_form'] = CommentForm()
       return context
 
+
 class AddComment(View):
 
   def post(self, request, *args, **kwargs):
@@ -94,17 +97,20 @@ class AddComment(View):
     
     return redirect(reverse_lazy('videos:detail-video', kwargs={'video': self.kwargs['video']}))
 
+
 class LikeVideo(View):
 
   def post(self, request, *args, **kwargs):
 
     if request.is_ajax:
-
+      
+      # Fetching request data
       like = json.loads(request.body.decode())['like']
       like_type = json.loads(request.body.decode())['like_type']
 
       video = Video.objects.get(uuid=kwargs['video'])
       
+      # Adding like or dislike
       if like_type == "like":
         video.likes = F('likes') + like
       else:
@@ -113,6 +119,7 @@ class LikeVideo(View):
       video.save()
 
       return JsonResponse({'like': like})
+
 
 class PrivacyPolicy(TemplateView):
   template_name = "videos/privacy-policy.html"

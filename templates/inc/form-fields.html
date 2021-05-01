@@ -1,12 +1,18 @@
 {% for field in form %}
+
   <div class="form-group">
     {{field}}
   </div>
+
   <div class="form-field-error">
+
     {% if form.errors %}
       {% for error in field.errors %}
+
         <p class="text-danger">{{ error }}</p>
+        
       {% endfor %}
     {% endif %}
+
   </div>
 {% endfor %}

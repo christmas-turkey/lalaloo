@@ -4,21 +4,22 @@ csrf.innerHTML = '{% csrf_token %}'
 const xhr = new XMLHttpRequest()
 
 
-function sendLike(target) {
-
-  const adress = target.dataset.adress
-  const uuid = target.dataset.videoUuid
-  const type = target.dataset.likeType
+function saveLike(caller) {
+  
+  // Retrieving metadata from like's or dislike's link
+  const adress = caller.dataset.adress
+  const uuid = caller.dataset.videoUuid
+  const type = caller.dataset.likeType
 
   xhr.open('POST', adress, true);
 
   let likesQuantity = null;
 
   if (type === "like") {
-    likesQuantity = target.querySelector('#likes')
+    likesQuantity = caller.querySelector('#likes')
 
   } else if (type === "dislike") {
-    likesQuantity = target.querySelector('#dislikes')
+    likesQuantity = caller.querySelector('#dislikes')
 
   }
 
@@ -26,12 +27,12 @@ function sendLike(target) {
   xhr.onreadystatechange = () => {
 
     if (xhr.readyState === 4 && xhr.status === 200) {
-
+     
       const response = JSON.parse(xhr.responseText);
       likesQuantity.innerHTML = +likesQuantity.innerHTML + response.like
       
       // Change link's style after clicking
-      target.classList.toggle('liked')
+      caller.classList.toggle('liked')
 
       }
 
@@ -59,7 +60,6 @@ function sendLike(target) {
 
   for (let link of links) {
 
-    const adress = link.dataset.adress
     const uuid = link.dataset.videoUuid
     const type = link.dataset.likeType
 

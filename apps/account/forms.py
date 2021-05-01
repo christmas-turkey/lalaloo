@@ -43,6 +43,7 @@ class SignUpForm(UserCreationForm):
     'placeholder': 'Confirm password:'
   }))
 
+
 class VideoUploadForm(forms.ModelForm):
 
   title = forms.CharField(widget=forms.TextInput(attrs={

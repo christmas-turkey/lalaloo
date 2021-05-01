@@ -28,6 +28,7 @@ class Video(models.Model):
   def __str__(self):
     return self.title
 
+
 @receiver(pre_save, sender=Video)
 def set_mp4(sender, instance, **kwargs):
 
