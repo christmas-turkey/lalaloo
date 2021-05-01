@@ -24,7 +24,7 @@
   
   {% if videos %}
 
-    {% for video in videos %}
+    {% for video in page_obj %}
 
     <div class="card mt-4 mb-4" style="box-shadow: 0 0 25px 3px rgb(165, 165, 165);">
       <div class="card-header d-flex justify-content-between pl-4 pr-4 pt-4">
@@ -84,6 +84,35 @@
     </div>
 
     {% endfor %}
+    
+    {% if page_obj.has_other_pages %}
+      <nav>
+
+        <ul class="pagination d-flex justify-content-center">
+          
+          {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+          {% endif %}
+          
+          {% for page in page_obj.paginator.page_range %}
+            
+            {% if page_obj.number == page %}
+            <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+            {% endif %}
+          
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+          {% endif %}
+
+        </ul>
+
+      </nav>
+    {% endif %}
+
   {% else %}
     <h2>No videos found ...</h2>
   {% endif %}

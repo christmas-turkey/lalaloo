@@ -7,6 +7,7 @@ from django.views import View
 from django.contrib.auth.views import redirect_to_login
 from django.db.models import F
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 from .models import Video, Comment
 from .forms import CommentForm
@@ -16,8 +17,15 @@ class MainPage(View):
 
   def get(self, request, *args, **kwargs):
 
+      videos = Video.objects.all().order_by('-date') 
+
+      paginator = Paginator(videos, 6)
+      page_number = request.GET.get('page')
+      page_obj = paginator.get_page(page_number)
+
       context = {
-        'videos': Video.objects.all().order_by('-date') 
+        'videos': videos,
+        'page_obj': page_obj
       }
       
       return render(request, 'videos/index.html', context)
