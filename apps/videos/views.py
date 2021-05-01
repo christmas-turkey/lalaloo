@@ -13,19 +13,24 @@ from .models import Video, Comment
 from .forms import CommentForm
 
 class MainPage(View):
+
+  def paginate(self, request, objects):
+     
+      paginator = Paginator(objects, 6)
+      page_number = request.GET.get('page')
+      page_obj = paginator.get_page(page_number)
+
+      return page_obj
+    
   
 
   def get(self, request, *args, **kwargs):
 
       videos = Video.objects.all().order_by('-date') 
 
-      paginator = Paginator(videos, 6)
-      page_number = request.GET.get('page')
-      page_obj = paginator.get_page(page_number)
-
       context = {
         'videos': videos,
-        'page_obj': page_obj
+        'page_obj': self.paginate(request, videos)
       }
       
       return render(request, 'videos/index.html', context)
@@ -46,7 +51,8 @@ class MainPage(View):
       videos = Video.objects.filter(title__icontains=search_request)
     
     context = {
-      'videos': videos
+      'videos': videos,
+      'page_obj': self.paginate(request, videos)
     }
 
     return render(request, 'videos/index.html', context)
