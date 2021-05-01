@@ -4,9 +4,10 @@ from .models import Comment
 
 class CommentForm(forms.ModelForm):
   
-  body = forms.CharField(label='Leave your comment comment:', widget=forms.Textarea(attrs={
+  body = forms.CharField(widget=forms.Textarea(attrs={
     'class': 'form-control',
-    'style': 'resize: none;'
+    'style': 'resize: none;',
+    'placeholder': 'Leave your comment:'
   }))
 
   class Meta:

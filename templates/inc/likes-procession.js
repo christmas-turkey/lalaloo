@@ -9,9 +9,6 @@ function sendLike(target) {
   const adress = target.dataset.adress
   const uuid = target.dataset.videoUuid
   const type = target.dataset.likeType
-  
-  // Change link's style after clicking
-  target.classList.toggle('liked')
 
   xhr.open('POST', adress, true);
 
@@ -33,6 +30,9 @@ function sendLike(target) {
       const response = JSON.parse(xhr.responseText);
       likesQuantity.innerHTML = +likesQuantity.innerHTML + response.like
       
+      // Change link's style after clicking
+      target.classList.toggle('liked')
+
       }
 
     }

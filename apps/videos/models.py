@@ -17,7 +17,7 @@ class Video(models.Model):
   likes = models.IntegerField(default=0)
   dislikes = models.IntegerField(default=0)
   views = models.IntegerField(default=0)
-  author = models.ForeignKey(User, on_delete=models.PROTECT)
+  author = models.ForeignKey(User, on_delete=models.PROTECT, related_name='videos')
   video = models.FileField(upload_to="%Y/%m/%d",
                            validators=[FileExtensionValidator(allowed_extensions=['mp4', 'wmv', 'ogg', 'mov'])])
   uuid = models.UUIDField(default=uuid.uuid4, unique=True)

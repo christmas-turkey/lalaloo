@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 .fas, .fab {
   margin-left: 8px;
   margin-right: 8px;
@@ -5,4 +11,18 @@
 
 .liked * {
   color: rgb(182, 1, 1);
+}
+
+.navbar-toggler {
+  outline: none;
+  border: none;
+  font-size: 30px;
+}
+
+.divider {
+  width: 100vw;
+  height: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: lightgray;
 }
