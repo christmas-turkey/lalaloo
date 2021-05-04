@@ -1,0 +1,25 @@
+<footer class="text-center bg-secondary p-5">
+
+  <a class="nav-link d-flex flex-column align-items-center text-white" href="{% url 'videos:main-page' %}">
+    <h3>La La Loo <i class="fas fa-video"></i></h3>
+    <p>A video hub service</p>
+  </a>
+
+  <ul class="navbar-nav d-flex flex-column mt-3">
+
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{% url 'videos:privacy-policy' %}">Privacy policy</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{% url 'account:signin' %}">Sign in</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{% url 'account:signup' %}">Sign up</a>
+    </li>
+
+  </ul>
+  
+  <p class="mt-4 text-light">&copy;2021 All rights reserved.</p>
+</footer>
