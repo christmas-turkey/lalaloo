@@ -13,6 +13,11 @@
     
     <h2 class="mb-4">Sign in</h2>
     {% include 'inc/form-fields.html' %}
+    
+    <div class="mt-4 mb-4">
+      <a href="{% url 'account:signup' %}">Don't have an account</a>
+    </div>
+
     <button class="btn btn-primary">Sign in</button>
 
     {% if messages %}
