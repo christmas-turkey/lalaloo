@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+end{% extends 'base.html' %}
 
 {% block title %}LaLaLoo - {{video.title}}{% endblock %}
 
@@ -24,7 +24,7 @@
         
         <h5 class="d-flex">
 
-          <a onclick="saveLike(this)"
+          <a onclick="sendLike(this)"
             data-adress="{% url 'videos:like-video' video.uuid %}"
             data-like-type="like"
             data-video-uuid="{{video.uuid}}"
@@ -32,7 +32,7 @@
             <span id="likes">{{video.likes}}</span></span>
           </a>
 
-          <a onclick="saveLike(this)"
+          <a onclick="sendLike(this)"
             data-adress="{% url 'videos:like-video' video.uuid %}"
             data-like-type="dislike"
             data-video-uuid="{{video.uuid}}"

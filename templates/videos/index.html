@@ -56,7 +56,7 @@
           <div class="col-md-6 pt-3">
             <h5 class="d-flex">
 
-              <a onclick="saveLike(this)"
+              <a onclick="sendLike(this)"
                 data-adress="{% url 'videos:like-video' video.uuid %}"
                 data-like-type="like"
                 data-video-uuid="{{video.uuid}}"
@@ -64,7 +64,7 @@
                 <span id="likes">{{video.likes}}</span></span>
               </a>
 
-              <a onclick="saveLike(this)"
+              <a onclick="sendLike(this)"
                 data-adress="{% url 'videos:like-video' video.uuid %}"
                 data-like-type="dislike"
                 data-video-uuid="{{video.uuid}}"

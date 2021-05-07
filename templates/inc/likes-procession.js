@@ -4,7 +4,7 @@ csrf.innerHTML = '{% csrf_token %}'
 const xhr = new XMLHttpRequest()
 
 
-function saveLike(caller) {
+function sendLike(caller) {
   
   // Retrieving metadata from like's or dislike's link
   const adress = caller.dataset.adress
@@ -24,34 +24,33 @@ function saveLike(caller) {
   }
 
 
-  xhr.onreadystatechange = () => {
-
-    if (xhr.readyState === 4 && xhr.status === 200) {
-     
-      const response = JSON.parse(xhr.responseText);
-      likesQuantity.innerHTML = +likesQuantity.innerHTML + response.like
-      
-      // Change link's style after clicking
-      caller.classList.toggle('liked')
-
-      }
-
-    }
-  
   xhr.setRequestHeader('X-CSRFToken', csrf.firstChild.value)
-  
+
+
+  let likeValue = null;
+
   // Check whether user already liked the video
   if (localStorage.getItem([`${uuid}__${type}`])) {
-    
+
+    likeValue = -1
+
+    likesQuantity.innerHTML = +likesQuantity.innerHTML + likeValue
+
     localStorage.removeItem(`${uuid}__${type}`)
-    xhr.send(JSON.stringify({like: -1, like_type: type}))
+    xhr.send(JSON.stringify({like: likeValue, like_type: type}))
 
   } else {
+
+    likeValue = 1
+
+    likesQuantity.innerHTML = +likesQuantity.innerHTML + likeValue
     
     localStorage.setItem(`${uuid}__${type}`, true)
-    xhr.send(JSON.stringify({like: 1, like_type: type}))
+    xhr.send(JSON.stringify({like: likeValue, like_type: type}))
   
   }
+
+  caller.classList.toggle('liked')
     
 }
 
